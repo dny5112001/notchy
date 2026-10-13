@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0.15" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#9a7bff"/>
+      <stop offset="0.5" stop-color="#5a3be0"/>
+      <stop offset="1" stop-color="#22145f"/>
+    </linearGradient>
+    <radialGradient id="shine" cx="0.22" cy="0.1" r="0.7">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floor" cx="0.5" cy="1.1" r="0.75">
+      <stop offset="0" stop-color="#35e3c0" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#35e3c0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#6dffd9" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#6dffd9" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="eye" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#aefced"/>
+    </linearGradient>
+    <clipPath id="squircle">
+      <rect x="100" y="100" width="824" height="824" rx="186"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircle)">
+    <rect x="100" y="100" width="824" height="824" fill="url(#bg)"/>
+    <rect x="100" y="100" width="824" height="824" fill="url(#floor)"/>
+    <rect x="100" y="100" width="824" height="824" fill="url(#shine)"/>
+
+    <!-- The notch, hanging from the top edge with concave shoulders -->
+    <path d="M262 100 H762 C734 100 722 114 722 146 V420 C722 520 652 590 552 590 H472 C372 590 302 520 302 420 V146 C302 114 290 100 262 100 Z" fill="#050508"/>
+
+    <!-- Face -->
+    <ellipse cx="512" cy="372" rx="200" ry="150" fill="url(#glow)"/>
+    <rect x="404" y="270" width="86" height="164" rx="43" fill="url(#eye)"/>
+    <rect x="534" y="270" width="86" height="164" rx="43" fill="url(#eye)"/>
+    <path d="M462 492 Q512 530 562 492" fill="none" stroke="#aefced" stroke-width="22" stroke-linecap="round"/>
+  </g>
+
+  <rect x="100.5" y="100.5" width="823" height="823" rx="185.5" fill="none" stroke="#ffffff" stroke-opacity="0.14"/>
+</svg>

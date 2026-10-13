@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notchy</title>
+    <script type="module" src="/src/settings.ts"></script>
+  </head>
+  <body>
+    <header data-tauri-drag-region>
+      <span class="brand" data-tauri-drag-region>Notchy</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="stage">
+          <div class="mini-island" id="preview">
+            <div id="previewFace"></div>
+            <div class="copy">
+              <div class="title" id="previewTitle"></div>
+              <p class="line" id="previewLine"></p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button class="pill" id="shuffle"></button>
+          <button class="pill primary" id="playOnNotch"></button>
+        </div>
+      </section>
+
+      <section>
+        <h2>Personality</h2>
+        <div id="personas" class="personas"></div>
+      </section>
+
+      <section>
+        <h2>Speech</h2>
+        <div class="group">
+          <div class="row">
+            <span class="label"><i class="ico" style="--c: #0a84ff" data-icon="globe"></i>Language</span>
+            <div class="segmented" id="language">
+              <button data-value="english">English</button>
+              <button data-value="hinglish">Hinglish</button>
+              <button data-value="hindi">हिंदी</button>
+            </div>
+          </div>
+          <div class="row status-row" id="hindiNote" hidden>
+            <span class="hint" id="hindiNoteText"></span>
+          </div>
+          <label class="row">
+            <span class="label"><i class="ico" style="--c: #ff9f0a" data-icon="voice"></i>Speak out loud</span>
+            <input type="checkbox" class="switch" id="voiceEnabled" />
+          </label>
+          <label class="row">
+            <span class="label"><i class="ico" style="--c: #ff375f" data-icon="bell"></i>Sound effects</span>
+            <input type="checkbox" class="switch" id="soundEffects" />
+          </label>
+          <div class="row">
+            <span class="label indent">Voice engine</span>
+            <div class="segmented" id="engine">
+              <button data-value="apple">Mac</button>
+              <button data-value="elevenlabs">ElevenLabs</button>
+            </div>
+          </div>
+          <label class="row apple-only">
+            <span class="label indent">Voice</span>
+            <select id="voice"></select>
+          </label>
+          <div class="row eleven-only" id="keyRow">
+            <span class="label indent">API key</span>
+            <span class="inline" id="keyEntry">
+              <input type="password" id="elevenKey" placeholder="Paste your ElevenLabs key" spellcheck="false" autocomplete="off" />
+              <button class="pill small primary" id="saveKey">Connect</button>
+            </span>
+            <span class="inline" id="keySaved" hidden>
+              <span class="connected">Connected</span>
+              <button class="link" id="removeKey">Remove</button>
+            </span>
+          </div>
+          <div class="row eleven-only needs-key">
+            <span class="label indent" id="elevenVoiceLabel">Voice</span>
+            <span class="inline">
+              <button class="play visible" id="elevenPreview" title="Hear a sample"></button>
+              <select id="elevenVoice"></select>
+            </span>
+          </div>
+          <label class="row eleven-only needs-key">
+            <span class="label indent">Model</span>
+            <select id="elevenModel"></select>
+          </label>
+          <div class="row eleven-only status-row">
+            <span class="hint" id="elevenStatus"></span>
+          </div>
+          <label class="row">
+            <span class="label indent">Speed</span>
+            <input type="range" id="rate" min="130" max="260" step="5" />
+          </label>
+          <label class="row">
+            <span class="label indent">Volume</span>
+            <input type="range" id="volume" min="0" max="1" step="0.05" />
+          </label>
+          <div class="row footer">
+            <span class="hint apple-only" id="voiceHint"></span>
+            <span class="inline">
+              <button class="link apple-only" id="getVoices">Get voices…</button>
+              <button class="pill small" id="previewVoice"></button>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Reacts to</h2>
+        <div class="group" id="events"></div>
+      </section>
+
+      <section>
+        <h2>Battery warnings</h2>
+        <div class="group">
+          <label class="row">
+            <span class="label"><i class="ico" style="--c: #ffd60a; --fg: #000" data-icon="batteryLow"></i>Low at</span>
+            <span class="inline"><input type="range" id="lowBattery" min="10" max="50" step="5" /><b class="value" id="lowBatteryValue"></b></span>
+          </label>
+          <label class="row">
+            <span class="label"><i class="ico" style="--c: #ff453a" data-icon="batteryLow"></i>Critical at</span>
+            <span class="inline"><input type="range" id="criticalBattery" min="3" max="15" step="1" /><b class="value" id="criticalBatteryValue"></b></span>
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Quiet hours</h2>
+        <div class="group">
+          <label class="row">
+            <span class="label"><i class="ico" style="--c: #5e5ce6" data-icon="moon"></i>
+              <span>Stay silent at night<small>Still shows in the notch</small></span></span>
+            <input type="checkbox" class="switch" id="quietEnabled" />
+          </label>
+          <div class="row">
+            <span class="label indent">Between</span>
+            <span class="inline">
+              <select id="quietStart"></select>
+              <span class="hint">and</span>
+              <select id="quietEnd"></select>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <footer>Notchy 0.1.0</footer>
+    </main>
+  </body>
+</html>

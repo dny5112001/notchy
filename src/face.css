@@ -1,0 +1,170 @@
+/* Two glowing robot eyes. Lids are drawn in --lid (the background colour) and slide over
+   the eyes to make expressions. Size everything with --s. */
+.face {
+  --s: 1;
+  --eye: #fff;
+  --lid: #000;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--s) * 9px);
+  width: calc(var(--s) * 52px);
+  height: calc(var(--s) * 40px);
+  flex: none;
+}
+
+.face .eyes {
+  display: flex;
+  gap: calc(var(--s) * 9px);
+  transition: transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+.face .eye {
+  position: relative;
+  width: calc(var(--s) * 13px);
+  height: calc(var(--s) * 21px);
+  border-radius: calc(var(--s) * 6.5px);
+  background: var(--eye);
+  overflow: hidden;
+  transition:
+    transform 0.35s cubic-bezier(0.3, 1.4, 0.5, 1),
+    background 0.4s ease;
+}
+
+.face .lid {
+  position: absolute;
+  left: -40%;
+  width: 180%;
+  height: 100%;
+  background: var(--lid);
+  transition: transform 0.35s cubic-bezier(0.3, 1.2, 0.5, 1);
+}
+.face .lid.top {
+  top: -100%;
+}
+.face .lid.bottom {
+  top: 100%;
+  border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+}
+
+/* Blink */
+.face.blink .eye {
+  transform: scaleY(0.08);
+  transition-duration: 0.07s;
+}
+
+/* Moods */
+.face[data-mood="happy"] .lid.bottom,
+.face[data-mood="excited"] .lid.bottom,
+.face[data-mood="love"] .lid.bottom {
+  transform: translateY(-52%);
+}
+.face[data-mood="excited"] .eyes {
+  animation: face-bounce 0.9s ease-in-out infinite;
+}
+.face[data-mood="love"] .eye {
+  transform: scale(1.12);
+}
+
+.face[data-mood="sad"] .eye.l .lid.top {
+  transform: translateY(38%) rotate(-24deg);
+}
+.face[data-mood="sad"] .eye.r .lid.top {
+  transform: translateY(38%) rotate(24deg);
+}
+.face[data-mood="sad"] .eyes {
+  transform: translateY(calc(var(--s) * 3px));
+}
+
+.face[data-mood="sassy"] .lid.top {
+  transform: translateY(42%);
+}
+.face[data-mood="sassy"] .eyes {
+  transform: translateX(calc(var(--s) * 4px));
+}
+
+.face[data-mood="alarmed"] .eye {
+  transform: scale(1.15, 1.18);
+  border-radius: 50%;
+}
+.face[data-mood="alarmed"] .eyes {
+  animation: face-tremble 0.18s linear infinite;
+}
+
+.face[data-mood="sleepy"] .lid.top {
+  transform: translateY(66%);
+}
+.face[data-mood="sleepy"] .eyes {
+  animation: face-drift 3s ease-in-out infinite;
+}
+
+.face[data-mood="hot"] .lid.top {
+  transform: translateY(34%);
+}
+.face[data-mood="hot"] .sweat {
+  opacity: 1;
+  animation: face-sweat 1.6s ease-in infinite;
+}
+
+.face[data-mood="wink"] .eye.r .lid.top {
+  transform: translateY(47%);
+}
+.face[data-mood="wink"] .eye.r .lid.bottom {
+  transform: translateY(-47%);
+}
+
+.face[data-mood="curious"] .eye.l {
+  transform: scale(1.14);
+}
+.face[data-mood="curious"] .eye.r .lid.top {
+  transform: translateY(28%);
+}
+.face[data-mood="curious"] .eyes {
+  transform: translateX(calc(var(--s) * -3px)) rotate(-6deg);
+}
+
+.face[data-mood="dying"] .eye {
+  transform: scale(0.72);
+  animation: face-flicker 1.4s steps(1) infinite;
+}
+.face[data-mood="dying"] .lid.top {
+  transform: translateY(30%);
+}
+
+.face .sweat {
+  position: absolute;
+  right: calc(var(--s) * -2px);
+  top: calc(var(--s) * 2px);
+  width: calc(var(--s) * 6px);
+  height: calc(var(--s) * 8px);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: #64d2ff;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+@keyframes face-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(calc(var(--s) * -3px)); }
+}
+@keyframes face-tremble {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(calc(var(--s) * -0.8px)); }
+  75% { transform: translateX(calc(var(--s) * 0.8px)); }
+}
+@keyframes face-drift {
+  0%, 100% { transform: translateY(calc(var(--s) * 1px)) rotate(0); }
+  50% { transform: translateY(calc(var(--s) * 3px)) rotate(4deg); }
+}
+@keyframes face-sweat {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateY(calc(var(--s) * 18px)); opacity: 0; }
+}
+@keyframes face-flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.35; }
+  55% { opacity: 1; }
+  70% { opacity: 0.5; }
+}
