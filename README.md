@@ -16,11 +16,18 @@ out of the camera notch, a pair of animated eyes that match the mood, and a voic
 Download the `.dmg` from [Releases](../../releases) and drag **Notchy** into Applications.
 Universal: Apple Silicon and Intel, macOS 12+.
 
-Notchy is signed ad-hoc, not with a paid Apple Developer ID, so the first launch needs one
-extra step. **Right-click Notchy in Applications → Open → Open.** After that it launches
-normally. (Double-clicking the first time just shows a warning with no Open button.)
+Notchy is signed ad-hoc rather than with a paid Apple Developer ID, so it isn't notarized
+and macOS blocks the first launch with *"Apple could not verify Notchy is free of malware"*.
+To get past it:
 
-If macOS still refuses, clear the download flag and try again:
+1. Double-click **Notchy** and dismiss the warning.
+2. Open **System Settings → Privacy & Security**, scroll to **Security**.
+3. Next to *"Notchy was blocked to protect your Mac"*, click **Open Anyway** and authenticate.
+
+Only the first launch needs this. On macOS 15 (Sequoia) and later, right-click → Open no
+longer works — Apple removed that bypass, so the Settings route above is the one that does.
+
+One command does the same thing on any macOS version:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/Notchy.app
