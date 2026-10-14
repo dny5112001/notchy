@@ -13,15 +13,25 @@ out of the camera notch, a pair of animated eyes that match the mood, and a voic
 
 ## Install
 
-Download the `.dmg` from [Releases](../../releases), open it and drag **Notchy** into
-Applications. The app isn't notarized yet, so the first time right-click it → **Open**.
+Download the `.dmg` from [Releases](../../releases) and drag **Notchy** into Applications.
+Universal: Apple Silicon and Intel, macOS 12+.
 
-Or build it yourself:
+Notchy is signed ad-hoc, not with a paid Apple Developer ID, so the first launch needs one
+extra step. **Right-click Notchy in Applications → Open → Open.** After that it launches
+normally. (Double-clicking the first time just shows a warning with no Open button.)
+
+If macOS still refuses, clear the download flag and try again:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/Notchy.app
+```
+
+Or build it yourself, which skips Gatekeeper entirely:
 
 ```bash
 pnpm install
-pnpm tauri build
-open src-tauri/target/release/bundle/dmg/*.dmg
+pnpm tauri build --target universal-apple-darwin
+open src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
 ```
 
 ## ElevenLabs voice (optional)
